@@ -68,7 +68,7 @@ public final class JDataPanelFunc extends JPanel {
                 g2dBuffer.setColor(Color.blue);
                 g2dBuffer.drawLine(old_XX, old_out_y, XX, outYY);
 
-                g2dBuffer.setColor(Color.white);
+                g2dBuffer.setColor(Color.black);
                 g2dBuffer.drawLine(old_XX, old_test1_Y, XX, out1YY);
 
 
@@ -76,10 +76,7 @@ public final class JDataPanelFunc extends JPanel {
                 old_test_Y = testYY;
                 old_out_y = outYY;
                 old_test1_Y = out1YY;
-                
-                
-                
-//                old_err_Y = errYY;
+
             }
 
             old_XX = 0;
