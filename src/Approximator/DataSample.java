@@ -7,7 +7,7 @@ package Approximator;
 
 public class DataSample {
 
-    String function;
-    double error;
+    String function ="";
+    double error = Double.POSITIVE_INFINITY;
 
 }
