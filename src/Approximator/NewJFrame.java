@@ -5,12 +5,6 @@
  */
 package Approximator;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
-
 /**
  *
  * @author Nicola
@@ -19,6 +13,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     Gene gene = new Gene();
     Data data = new Data();
+    boolean runsim = false;
 
     /**
      * Creates new form NewJFrame
@@ -36,6 +31,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jButtonFind.setEnabled(state);
         jButtonMutate.setEnabled(state);
         jButtonRun.setEnabled(state);
+        jButtonFindMT.setEnabled(state);
 
     }
 
@@ -54,6 +50,12 @@ public class NewJFrame extends javax.swing.JFrame {
         gene.numProb = Double.valueOf(jLabel1Num.getText());
         gene.funProb = Double.valueOf(jLabel1Fun.getText());
         gene.divProb = Double.valueOf(jLabel1div.getText());
+
+        gene.selectionPercent = Double.valueOf(jLabel1Sel.getText());
+        gene.mutationPercent = Double.valueOf(jLabel1Mut.getText());
+        gene.randVariation = Double.valueOf(jLabel1Ran.getText());
+
+        gene.outLabel = jLabelStatus;
 
     }
 
@@ -91,11 +93,15 @@ public class NewJFrame extends javax.swing.JFrame {
         jTextQta = new javax.swing.JTextField();
         jTextRnd = new javax.swing.JTextField();
         jTextGen = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jTextThreads = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jButtonCreate = new javax.swing.JButton();
         jButtonFind = new javax.swing.JButton();
         jButtonMutate = new javax.swing.JButton();
         jButtonRun = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButtonFindMT = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextGG = new javax.swing.JTextField();
@@ -104,6 +110,8 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabelStatus = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel1Gen = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jSliderOps = new javax.swing.JSlider();
         jSliderVar = new javax.swing.JSlider();
@@ -120,6 +128,15 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel1Fun = new javax.swing.JLabel();
         jSliderdiv = new javax.swing.JSlider();
         jLabel1div = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jSliderSel = new javax.swing.JSlider();
+        jLabel1Sel = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jSliderMut = new javax.swing.JSlider();
+        jLabel1Mut = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jSliderRan = new javax.swing.JSlider();
+        jLabel1Ran = new javax.swing.JLabel();
         jDataPanelFunc1 = new Approximator.JDataPanelFunc();
         jButtonGraph = new javax.swing.JButton();
 
@@ -159,6 +176,15 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jTextGen.setText("100");
 
+        jLabel18.setText("Thr");
+
+        jTextThreads.setText("8");
+        jTextThreads.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextThreadsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -171,7 +197,8 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel18))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextMin)
@@ -179,7 +206,8 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addComponent(jTextRnd)
                     .addComponent(jTextMax)
                     .addComponent(jTextQta, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
-                    .addComponent(jTextGen))
+                    .addComponent(jTextGen)
+                    .addComponent(jTextThreads))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -209,6 +237,10 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jTextGen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel18)
+                    .addComponent(jTextThreads, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -242,19 +274,43 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Stop");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButtonFindMT.setText("FindMT");
+        jButtonFindMT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFindMTActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonMutate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonRun, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButtonFind, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonCreate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonFindMT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonFind, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonCreate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonMutate))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButtonRun, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(21, 21, 21))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,10 +320,14 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonFind)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonFindMT)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonMutate)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonRun)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Function"));
@@ -314,9 +374,6 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
         jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTable1KeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTable1KeyReleased(evt);
             }
@@ -331,6 +388,10 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabelStatus.setText("Stat");
         jLabelStatus.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        jLabel15.setText("Gen:");
+
+        jLabel1Gen.setText("0");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -341,7 +402,11 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addComponent(jLabelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel8)
-                        .addGap(0, 235, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1Gen, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -349,11 +414,19 @@ public class NewJFrame extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jLabelStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel1Gen))
+                .addContainerGap())
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Probabilities"));
+
+        jSliderNum.setValue(66);
+
+        jSliderFun.setValue(33);
 
         jLabel9.setText("Ops");
 
@@ -377,14 +450,38 @@ public class NewJFrame extends javax.swing.JFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jSliderFun, org.jdesktop.beansbinding.ELProperty.create("${value/100}"), jLabel1Fun, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
+        jSliderdiv.setValue(33);
+
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jSliderdiv, org.jdesktop.beansbinding.ELProperty.create("${value/100}"), jLabel1div, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        jLabel11.setText("Sel");
+
+        jSliderSel.setValue(10);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jSliderSel, org.jdesktop.beansbinding.ELProperty.create("${value / 100}"), jLabel1Sel, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        jLabel16.setText("Mut");
+
+        jSliderMut.setToolTipText("");
+        jSliderMut.setValue(25);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jSliderMut, org.jdesktop.beansbinding.ELProperty.create("${value / 100}"), jLabel1Mut, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        jLabel17.setText("Ran");
+
+        jSliderRan.setValue(20);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jSliderRan, org.jdesktop.beansbinding.ELProperty.create("${value / 100}"), jLabel1Ran, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+            .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
@@ -394,7 +491,7 @@ public class NewJFrame extends javax.swing.JFrame {
                             .addComponent(jLabel12))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSliderVar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                            .addComponent(jSliderVar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(jSliderOps, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(jSliderNum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
@@ -404,14 +501,32 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSliderdiv, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addComponent(jSliderdiv, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSliderSel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jSliderMut, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSliderRan, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel1Num, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                    .addComponent(jLabel1Var, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelOps, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1Fun, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1div, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel1Num, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                        .addComponent(jLabel1Var, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelOps, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1Fun, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1div, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1Sel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1Mut, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(jLabel1Ran, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -444,6 +559,21 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addComponent(jLabel14)
                     .addComponent(jLabel1div)
                     .addComponent(jSliderdiv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel11)
+                    .addComponent(jSliderSel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1Sel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel16)
+                    .addComponent(jSliderMut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1Mut))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel17)
+                    .addComponent(jSliderRan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1Ran))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -486,8 +616,9 @@ public class NewJFrame extends javax.swing.JFrame {
                                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
                                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jDataPanelFunc1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(6, 6, 6)))
                         .addGap(18, 18, 18)
@@ -507,15 +638,20 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDataPanelFunc1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonGraph))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonGraph)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jDataPanelFunc1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(38, 38, 38)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -528,110 +664,104 @@ public class NewJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFindActionPerformed
-        // FIND
-        // sin approx     "(4*x* (180-x) )   /   ( 40500- (x*(180-x)) )"
-        //gene.initData(0,1,30,"(sin((2*x)*3.1416)+1)/2");
-        Thread RunSim = new Thread(new Runnable() {
+        //  FIND
+        //  sin approx     "(4*x* (180-x) )   /   ( 40500- (x*(180-x)) )"
+        //  gene.initData(0,1,30,"(sin((2*x)*3.1416)+1)/2");
 
-            @Override
-            public void run() {
-                try {
-
-                    setButtons(false);
-
-                    //gene.InitializeDataArray();
-                    gene.evaluateRmsFormulae();
-
-                    setButtons(true);
-
-                    // Sorting
-                    //Collections.sort(data.SampleList);
-                    try {
-                        data.SampleList.sort(new Comparator<DataSample>() {
-                            @Override
-                            public int compare(DataSample o1, DataSample o2) {
-
-                                double in1 = o1.error;
-                                double in2 = o2.error;
-
-                                /// remove Nan and neg infinity
-                                if (Double.isNaN(in1)) {
-                                    in1 = Double.POSITIVE_INFINITY;
-                                }
-                                if (Double.isNaN(in2)) {
-                                    in2 = Double.POSITIVE_INFINITY;
-                                }
-
-//                            if (in1 == Double.NEGATIVE_INFINITY) {
-//                                in1 = Double.POSITIVE_INFINITY;
-//                            }
-//                            
-//                            if (in2 == Double.NEGATIVE_INFINITY) {
-//                                in2 = Double.POSITIVE_INFINITY;
-//                            }
-                                if (in1 > in2) {
-                                    return 1;
-                                } else if (in1 < in2) {
-                                    return -1;
-                                } else {
-                                    return 0;
-                                }
-                            }
-                        });
-                    } catch (Exception e) {
-                        System.out.println(".run() " + e.getMessage());
-                    }
-
-                    jTable1.repaint();
-                } catch (Exception e) {
-                    System.out.println((e.getMessage()));
-                }
-
+        Thread thread = new Thread(() -> {
+            try {
+                setButtons(false);
+                gene.evaluate();
+                jTable1.repaint();
+                setButtons(true);
+            } catch (Exception e) {
+                System.out.println((e.getMessage()));
             }
         });
-        RunSim.start();
 
-
+        thread.start();
     }//GEN-LAST:event_jButtonFindActionPerformed
 
 
     private void jButtonMutateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMutateActionPerformed
         // MUTATE
 
-        gene.mutate();
-        jTextArea1.setText(gene.displayformulas());
+        Thread thread = new Thread(() -> {
+            try {
+                setButtons(false);
+                updateParameters();
+                gene.mutate();
+                gene.evaluate();
+                jTable1.repaint();
+                setButtons(true);
+
+            } catch (Exception e) {
+                System.out.println((e.getMessage()));
+            }
+        });
+
+        thread.start();
+
+
     }//GEN-LAST:event_jButtonMutateActionPerformed
 
     private void jButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateActionPerformed
-
         // CREATE
-        // update probs.
-        updateParameters();
 
-        gene.generateFormulae();
-        jTextArea1.setText(gene.displayformulas());
-
-        TableDataModelFunctions tableDataModel = new TableDataModelFunctions(data);
-        jTable1.setModel(tableDataModel);
-        jTable1.setAutoCreateRowSorter(true);
-
-    }//GEN-LAST:event_jButtonCreateActionPerformed
-
-    private void jButtonRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunActionPerformed
-        // TODO add your handling code here:
         Thread RunSim = new Thread(new Runnable() {
 
             @Override
             public void run() {
                 try {
-                    //gene.InitializeDataArray();
+                    updateParameters();
+                    setButtons(false);
                     gene.generateFormulae();
+                    setButtons(true);
+
+                    TableDataModelFunctions tableDataModel = new TableDataModelFunctions(data);
+                    jTable1.setModel(tableDataModel);
+                    jTable1.setAutoCreateRowSorter(true);
+
+                } catch (Exception e) {
+                    System.out.println(".run() " + e.getMessage());
+                }
+            }
+        });
+        RunSim.start();
+
+    }//GEN-LAST:event_jButtonCreateActionPerformed
+    private void jButtonRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunActionPerformed
+        // RUN
+
+        runsim = true;
+        Thread RunSim = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+                    setButtons(false);
+                    updateParameters();
+                    gene.generateFormulae();
+                    TableDataModelFunctions tableDataModel = new TableDataModelFunctions(data);
+                    jTable1.setModel(tableDataModel);
+                    jTable1.setAutoCreateRowSorter(true);
+                    jTable1.repaint();
+                   // gene.evaluate();
+                    gene.evaluateThreads(Integer.valueOf(jTextThreads.getText()));
                     for (int i = 0; i < Integer.valueOf(jTextGen.getText()); i++) {
-                        gene.evaluateRmsFormulae();
                         gene.mutate();
-                        System.out.println("--------- GEN: " + i + " ------------------");
+                        //gene.evaluate();
+                         gene.evaluateThreads(Integer.valueOf(jTextThreads.getText()));
+                        jTable1.repaint();
+                        jLabel1Gen.setText("" + i);
+
+                        //exit sim
+                        if (!runsim) {
+                            runsim = true;
+                            break;
+                        }
                     }
-                    gene.evaluateRmsFormulae();
+                    setButtons(true);
                 } catch (Exception e) {
                     System.out.println((e.getMessage()));
                 }
@@ -657,17 +787,41 @@ public class NewJFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
-        // TODO add your handling code here:
-
-        
-    }//GEN-LAST:event_jTable1KeyPressed
-
     private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
         // TODO add your handling code here:
         paintGraph();
-        
+
     }//GEN-LAST:event_jTable1KeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // STOP BUTTON
+        runsim = false;
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButtonFindMTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFindMTActionPerformed
+        // Multitasking test
+
+        Thread thread = new Thread(() -> {
+            try {
+                setButtons(false);
+                updateParameters();
+                gene.evaluateThreads(Integer.valueOf(jTextThreads.getText()));
+                setButtons(true);
+                //gene.dataList.SampleList.sort(new CompareDataSample());
+            } catch (Exception e) {
+                System.out.println((e.getMessage()));
+            }
+        });
+        
+        thread.start();
+        
+
+
+    }//GEN-LAST:event_jButtonFindMTActionPerformed
+
+    private void jTextThreadsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextThreadsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextThreadsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -705,19 +859,30 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonCreate;
     private javax.swing.JButton jButtonFind;
+    private javax.swing.JButton jButtonFindMT;
     private javax.swing.JButton jButtonGraph;
     private javax.swing.JButton jButtonMutate;
     private javax.swing.JButton jButtonRun;
     private Approximator.JDataPanelFunc jDataPanelFunc1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel1Fun;
+    private javax.swing.JLabel jLabel1Gen;
+    private javax.swing.JLabel jLabel1Mut;
     private javax.swing.JLabel jLabel1Num;
+    private javax.swing.JLabel jLabel1Ran;
+    private javax.swing.JLabel jLabel1Sel;
     private javax.swing.JLabel jLabel1Var;
     private javax.swing.JLabel jLabel1div;
     private javax.swing.JLabel jLabel2;
@@ -739,8 +904,11 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSlider jSliderFun;
+    private javax.swing.JSlider jSliderMut;
     private javax.swing.JSlider jSliderNum;
     private javax.swing.JSlider jSliderOps;
+    private javax.swing.JSlider jSliderRan;
+    private javax.swing.JSlider jSliderSel;
     private javax.swing.JSlider jSliderVar;
     private javax.swing.JSlider jSliderdiv;
     private javax.swing.JTable jTable1;
@@ -753,6 +921,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextRes;
     private javax.swing.JTextField jTextRnd;
     private javax.swing.JTextField jTextStep;
+    private javax.swing.JTextField jTextThreads;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

@@ -39,8 +39,9 @@
                           </Group>
                           <Component id="jPanel3" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                               <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jDataPanelFunc1" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                           </Group>
@@ -67,19 +68,27 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jPanel1" max="32767" attributes="0"/>
-                          <Component id="jPanel2" max="32767" attributes="0"/>
-                          <Component id="jPanel5" max="32767" attributes="0"/>
+                          <Component id="jPanel5" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="jScrollPane3" min="-2" pref="258" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel4" min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="jDataPanelFunc1" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonGraph" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jButtonGraph" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="10" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jDataPanelFunc1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="80" max="32767" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="71" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" pref="97" max="-2" attributes="0"/>
@@ -131,7 +140,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -140,6 +149,7 @@
                       <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel18" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -149,8 +159,9 @@
                       <Component id="jTextMax" alignment="0" max="32767" attributes="0"/>
                       <Component id="jTextQta" pref="115" max="32767" attributes="0"/>
                       <Component id="jTextGen" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jTextThreads" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -186,6 +197,11 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextGen" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextThreads" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -253,6 +269,19 @@
             <Property name="text" type="java.lang.String" value="100"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JLabel" name="jLabel18">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Thr"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTextThreads">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="8"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextThreadsActionPerformed"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jPanel2">
@@ -268,16 +297,30 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jButtonMutate" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jButtonRun" alignment="0" max="32767" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jButtonFind" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jButtonCreate" alignment="0" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jButton1" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jButtonFindMT" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jButtonFind" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jButtonCreate" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="jButtonMutate" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jButtonRun" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -289,10 +332,14 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButtonFind" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jButtonFindMT" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButtonMutate" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButtonRun" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="27" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -328,6 +375,22 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRunActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Stop"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonFindMT">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="FindMT"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFindMTActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -399,7 +462,6 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseClicked"/>
-            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTable1KeyPressed"/>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTable1KeyReleased"/>
           </Events>
         </Component>
@@ -417,13 +479,18 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabelStatus" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="235" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jLabel15" min="-2" pref="38" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel1Gen" pref="186" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -435,8 +502,13 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabelStatus" min="-2" pref="56" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="jLabelStatus" min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace pref="16" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel1Gen" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -454,6 +526,16 @@
             <Property name="verticalAlignment" type="int" value="1"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JLabel" name="jLabel15">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Gen:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1Gen">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="0"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jPanel5">
@@ -468,7 +550,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
@@ -479,7 +561,7 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jSliderVar" alignment="1" pref="158" max="32767" attributes="0"/>
+                              <Component id="jSliderVar" alignment="1" pref="0" max="32767" attributes="0"/>
                               <Component id="jSliderOps" alignment="1" pref="0" max="32767" attributes="0"/>
                               <Component id="jSliderNum" alignment="1" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -494,14 +576,38 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jSliderdiv" pref="0" max="32767" attributes="0"/>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel11" alignment="0" min="-2" pref="26" max="-2" attributes="0"/>
+                              <Component id="jLabel16" alignment="0" min="-2" pref="26" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jSliderSel" pref="0" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="jSliderMut" min="-2" pref="157" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jLabel17" min="-2" pref="26" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jSliderRan" pref="0" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="jLabel1Num" alignment="1" pref="27" max="32767" attributes="0"/>
-                      <Component id="jLabel1Var" alignment="1" max="32767" attributes="0"/>
-                      <Component id="jLabelOps" alignment="1" max="32767" attributes="0"/>
-                      <Component id="jLabel1Fun" max="32767" attributes="0"/>
-                      <Component id="jLabel1div" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="jLabel1Num" alignment="1" pref="27" max="32767" attributes="0"/>
+                          <Component id="jLabel1Var" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jLabelOps" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jLabel1Fun" max="32767" attributes="0"/>
+                          <Component id="jLabel1div" max="32767" attributes="0"/>
+                          <Component id="jLabel1Sel" max="32767" attributes="0"/>
+                      </Group>
+                      <Component id="jLabel1Mut" alignment="0" pref="31" max="32767" attributes="0"/>
+                      <Component id="jLabel1Ran" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -544,6 +650,24 @@
                       <Component id="jLabel1div" min="-2" max="-2" attributes="0"/>
                       <Component id="jSliderdiv" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                      <Component id="jSliderSel" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel1Sel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
+                      <Component id="jSliderMut" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel1Mut" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
+                      <Component id="jSliderRan" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel1Ran" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -555,8 +679,14 @@
         <Component class="javax.swing.JSlider" name="jSliderVar">
         </Component>
         <Component class="javax.swing.JSlider" name="jSliderNum">
+          <Properties>
+            <Property name="value" type="int" value="66"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JSlider" name="jSliderFun">
+          <Properties>
+            <Property name="value" type="int" value="33"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
@@ -604,10 +734,59 @@
           </BindingProperties>
         </Component>
         <Component class="javax.swing.JSlider" name="jSliderdiv">
+          <Properties>
+            <Property name="value" type="int" value="33"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1div">
           <BindingProperties>
             <BindingProperty name="text" source="jSliderdiv" sourcePath="${value/100}" target="jLabel1div" targetPath="text" updateStrategy="0" immediately="false"/>
+          </BindingProperties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel11">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Sel"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSlider" name="jSliderSel">
+          <Properties>
+            <Property name="value" type="int" value="10"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1Sel">
+          <BindingProperties>
+            <BindingProperty name="text" source="jSliderSel" sourcePath="${value / 100}" target="jLabel1Sel" targetPath="text" updateStrategy="0" immediately="false"/>
+          </BindingProperties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel16">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Mut"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSlider" name="jSliderMut">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="value" type="int" value="25"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1Mut">
+          <BindingProperties>
+            <BindingProperty name="text" source="jSliderMut" sourcePath="${value / 100}" target="jLabel1Mut" targetPath="text" updateStrategy="0" immediately="false"/>
+          </BindingProperties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel17">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ran"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSlider" name="jSliderRan">
+          <Properties>
+            <Property name="value" type="int" value="20"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1Ran">
+          <BindingProperties>
+            <BindingProperty name="text" source="jSliderRan" sourcePath="${value / 100}" target="jLabel1Ran" targetPath="text" updateStrategy="0" immediately="false"/>
           </BindingProperties>
         </Component>
       </SubComponents>
